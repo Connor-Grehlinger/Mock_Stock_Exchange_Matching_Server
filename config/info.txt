@@ -1,0 +1,1 @@
+Entry point used by docker

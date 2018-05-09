@@ -1,0 +1,12 @@
+version: '2'
+
+services:
+  exchange_match_server_test:
+    build: .
+    command: bash -c "ls -a && make all && for((n=0;n<1;n++)); do ./XMLRequestGen; done"
+    volumes:
+      - "./src:/src"
+      - "./logs:/var/log/erss"
+    ports:
+      - "12344:12344"
+    tty: true

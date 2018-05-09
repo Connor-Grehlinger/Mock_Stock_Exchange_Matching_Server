@@ -1,0 +1,22 @@
+version: '2'
+
+services:
+    db:
+        image: postgres
+        volumes:
+            - data-volume:/var/lib/postgresql/9.5/main
+        ports:
+            - "5432:5432"
+    exchange_match_server:
+        build: .
+        volumes:
+            - "./src:/src"
+            - "./logs:/var/log/erss"
+        ports:
+            - "12345:12345"
+        tty: true
+        depends_on:
+            - db
+        command: bash -c "sleep 2 && make all && ./ExchangeServer"
+volumes:
+    data-volume:
